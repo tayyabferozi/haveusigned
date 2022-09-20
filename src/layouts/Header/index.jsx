@@ -5,6 +5,11 @@ import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [sideMenuActive, setSideMenuActive] = useState(false);
+
+  const toggleSideMenu = () => {
+    setSideMenuActive((prevState) => !prevState);
+  };
 
   useEffect(() => {
     const ev = window.addEventListener("scroll", function () {
@@ -20,7 +25,10 @@ const Header = () => {
 
   return (
     <>
-      <div className="sidenav mobile-nav" id="slide_menu">
+      <div
+        className={clsx("sidenav mobile-nav", sideMenuActive && "active")}
+        id="slide_menu"
+      >
         <div className="side-multilv">
           <div className="collection side-multilv">
             <ul className="collapsible expandable">
@@ -65,10 +73,14 @@ const Header = () => {
           <div className="header-content">
             <nav className="nav-menu">
               <button
-                className="btn-icon waves-effect sidenav-trigger hamburger hamburger--spin show-md-down"
+                className={clsx(
+                  "btn-icon waves-effect sidenav-trigger hamburger hamburger--spin show-md-down",
+                  sideMenuActive && "is-active"
+                )}
                 id="mobile_menu"
                 type="button"
                 data-target="slide_menu"
+                onClick={toggleSideMenu}
               >
                 <span className="hamburger-box">
                   <span className="bar hamburger-inner"></span>
