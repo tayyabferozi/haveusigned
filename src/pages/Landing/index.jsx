@@ -22,7 +22,7 @@ const Landing = () => {
                 <strong>I want to create a new envelope for a...</strong>
               </h6>
               <div class="row justify-content-center home-category-icons">
-                <div class="col col-lg-4 col-sm-4 text-center mb-4">
+                <div class="col-12 col-lg-4 col-sm-6 text-center mb-4">
                   <a href="occasion/Ll7xmO">
                     <img
                       src="./assets/images/categories/v2/birthday.png"
@@ -31,7 +31,7 @@ const Landing = () => {
                     <span>Birthday</span>
                   </a>
                 </div>
-                <div class="col col-lg-4 col-sm-4 text-center mb-4">
+                <div class="col-12 col-lg-4 col-sm-6 text-center mb-4">
                   <a href="occasion/6lZvl1">
                     <img
                       src="./assets/images/categories/v2/leaving.png"
@@ -40,7 +40,7 @@ const Landing = () => {
                     <span>Leaving</span>
                   </a>
                 </div>
-                <div class="col col-lg-4 col-sm-4 text-center mb-4">
+                <div class="col-12 col-lg-4 col-sm-6 text-center mb-4">
                   <a href="occasion/VjXO9Q">
                     <img
                       src="./assets/images/categories/v2/new-baby.png"
@@ -49,7 +49,7 @@ const Landing = () => {
                     <span>New Baby</span>
                   </a>
                 </div>
-                <div class="col col-lg-4 col-sm-4 text-center mb-4">
+                <div class="col-12 col-lg-4 col-sm-6 text-center mb-4">
                   <a href="occasion/69N8lx">
                     <img
                       src="./assets/images/categories/v2/wedding.png"
@@ -58,7 +58,7 @@ const Landing = () => {
                     <span>Wedding</span>
                   </a>
                 </div>
-                <div class="col col-lg-4 col-sm-4 text-center mb-4">
+                <div class="col-12 col-lg-4 col-sm-6 text-center mb-4">
                   <a href="occasion/VjRGl7">
                     <img
                       src="./assets/images/categories/v2/retirement.png"
@@ -67,7 +67,7 @@ const Landing = () => {
                     <span>Retirement</span>
                   </a>
                 </div>
-                <div class="col col-lg-4 col-sm-4 text-center mb-4">
+                <div class="col-12 col-lg-4 col-sm-6 text-center mb-4">
                   <a href="occasion/qjykmK">
                     <img
                       src="./assets/images/categories/v2/new-home.png"

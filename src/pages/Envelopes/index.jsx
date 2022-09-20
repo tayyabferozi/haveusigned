@@ -14,20 +14,23 @@ const Envelopes = () => {
         <form id="contact_form" autoComplete="off" className="w-50 m-auto">
           <div className="row spacing6">
             <div className="col-sm-12 px-6">
-              <div className="input-field dark">
+              <div className="mb-4">
+                <label htmlFor="email">My email address is...</label>
                 <input
+                  className="form-control"
                   autoComplete="off"
                   id="email"
                   type="email"
                   required
                   placeholder="Enter your email"
                 />
-                <label htmlFor="email">My email address is...</label>
               </div>
             </div>
             <div className="col-sm-12 px-6">
-              <div className="input-field dark">
+              <div className="mb-4">
+                <label htmlFor="envelope_id">my unique envelope ID is...</label>
                 <input
+                  className="form-control"
                   autoComplete="off"
                   id="envelope_id"
                   name="envelope_id"
@@ -35,12 +38,13 @@ const Envelopes = () => {
                   required
                   placeholder="Enter your unique envelope ID"
                 />
-                <label htmlFor="envelope_id">my unique envelope ID is...</label>
               </div>
             </div>
             <div className="col-sm-12 px-6">
-              <div className="input-field dark">
+              <div className="mb-4">
+                <label htmlFor="password">and the password is...</label>
                 <input
+                  className="form-control"
                   id="password"
                   autoComplete="off"
                   name="password"
@@ -48,7 +52,6 @@ const Envelopes = () => {
                   required
                   type="password"
                 />
-                <label htmlFor="password">and the password is...</label>
               </div>
             </div>
           </div>

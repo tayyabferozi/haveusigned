@@ -16,53 +16,53 @@ const Contact = () => {
             <div id="success">
               <div>
                 <form id="contact_form">
-                  <div className="row spacing6">
+                  <div className="row spacing6 gy-5">
                     <div className="col-sm-6 px-6">
-                      <div className="input-field dark">
+                      <div className="mb-5">
+                        <label for="name">What is your name? *</label>
                         <input
-                          className="validate"
+                          className="validate form-control"
                           id="name"
                           type="text"
                           required
                         />
-                        <label for="name">What is your name? *</label>
                       </div>
                     </div>
                     <div className="col-sm-6 px-6">
-                      <div className="input-field dark">
+                      <div className="mb-5">
+                        <label for="email">What is your email? *</label>
                         <input
-                          className="validate"
+                          className="validate form-control"
                           id="email"
                           type="email"
                           required
                         />
-                        <label for="email">What is your email? *</label>
                       </div>
                     </div>
                     <div className="col-sm-6 px-6">
-                      <div className="input-field dark">
-                        <input id="phone" type="tel" />
+                      <div className="mb-5">
                         <label for="phone">
                           What is your phone number (optional)?
                         </label>
+                        <input className="form-control" id="phone" type="tel" />
                       </div>
                     </div>
                     <div className="col-sm-6 px-6">
-                      <div className="input-field dark">
-                        <input id="company" type="text" />
+                      <div className="mb-5">
                         <label for="company">
                           Company name, if applicable?
                         </label>
+                        <input id="company" type="text" />
                       </div>
                     </div>
                     <div className="col-sm-12 px-6">
-                      <div className="input-field dark">
+                      <div className="">
+                        <label for="message">Write your message here</label>
                         <textarea
-                          className="materialize-textarea"
+                          className="form-control"
                           id="message"
                           rows="6"
                         ></textarea>
-                        <label for="message">Write your message here</label>
                       </div>
                     </div>
                   </div>
