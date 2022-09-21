@@ -1,10 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import HomeVideo from "../../components/HomeVideo";
 import Features from "./Features";
 // import Testimonials from "./Testimonials";
 
 const Landing = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [cardsData, setCardsData] = useState([]);
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    setCardsData([
+      {
+        img: "./assets/images/categories/v2/birthday.png",
+        title: "Birthday",
+      },
+      {
+        img: "./assets/images/categories/v2/leaving.png",
+        title: "Leaving",
+      },
+      {
+        img: "./assets/images/categories/v2/new-baby.png",
+        title: "New Baby",
+      },
+      {
+        img: "./assets/images/categories/v2/wedding.png",
+        title: "Wedding",
+      },
+      {
+        img: "./assets/images/categories/v2/retirement.png",
+        title: "Retirement",
+      },
+      {
+        img: "./assets/images/categories/v2/new-home.png",
+        title: "New Home",
+      },
+    ]);
+
+    setIsLoading(false);
+  }, []);
+
   return (
     <main className="container-wrap">
       <section className="space-top space-top-short-sm" id="hiw">
@@ -21,82 +59,46 @@ const Landing = () => {
               <h6 className="mt-8 text-center">
                 <strong>I want to create a new envelope for a...</strong>
               </h6>
-              <div class="row justify-content-center home-category-icons">
-                <div class="col-12 col-lg-4 col-sm-6 text-center mb-4">
-                  <a href="occasion/Ll7xmO">
-                    <img
-                      src="./assets/images/categories/v2/birthday.png"
-                      alt="birthday"
-                    />
-                    <span>Birthday</span>
-                  </a>
-                </div>
-                <div class="col-12 col-lg-4 col-sm-6 text-center mb-4">
-                  <a href="occasion/6lZvl1">
-                    <img
-                      src="./assets/images/categories/v2/leaving.png"
-                      alt="leaving"
-                    />
-                    <span>Leaving</span>
-                  </a>
-                </div>
-                <div class="col-12 col-lg-4 col-sm-6 text-center mb-4">
-                  <a href="occasion/VjXO9Q">
-                    <img
-                      src="./assets/images/categories/v2/new-baby.png"
-                      alt="baby"
-                    />
-                    <span>New Baby</span>
-                  </a>
-                </div>
-                <div class="col-12 col-lg-4 col-sm-6 text-center mb-4">
-                  <a href="occasion/69N8lx">
-                    <img
-                      src="./assets/images/categories/v2/wedding.png"
-                      alt="wedding"
-                    />
-                    <span>Wedding</span>
-                  </a>
-                </div>
-                <div class="col-12 col-lg-4 col-sm-6 text-center mb-4">
-                  <a href="occasion/VjRGl7">
-                    <img
-                      src="./assets/images/categories/v2/retirement.png"
-                      alt="retirement"
-                    />
-                    <span>Retirement</span>
-                  </a>
-                </div>
-                <div class="col-12 col-lg-4 col-sm-6 text-center mb-4">
-                  <a href="occasion/qjykmK">
-                    <img
-                      src="./assets/images/categories/v2/new-home.png"
-                      alt="home"
-                    />
-                    <span>New Home</span>
-                  </a>
-                </div>
+              <div className="row justify-content-center home-category-icons">
+                {!isLoading ? (
+                  cardsData.map((el, idx) => {
+                    const { img, title } = el;
+
+                    return (
+                      <div
+                        key={"landing-cards" + idx}
+                        className="col-12 col-lg-4 col-sm-6 text-center mb-4"
+                      >
+                        <Link to="/occasion/Ll7xmO">
+                          <img src={img} alt={title} />
+                          <span>{title}</span>
+                        </Link>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <>
+                    <div className="col col-lg-4 col-sm-4 text-center mb-4 is-loading">
+                      <span className="rounded-circle">&nbsp;</span>
+                    </div>
+                    <div className="col col-lg-4 col-sm-4 text-center mb-4 is-loading">
+                      <span className="rounded-circle">&nbsp;</span>
+                    </div>
+                    <div className="col col-lg-4 col-sm-4 text-center mb-4 is-loading">
+                      <span className="rounded-circle">&nbsp;</span>
+                    </div>
+                    <div className="col col-lg-4 col-sm-4 text-center mb-4 is-loading">
+                      <span className="rounded-circle">&nbsp;</span>
+                    </div>
+                    <div className="col col-lg-4 col-sm-4 text-center mb-4 is-loading">
+                      <span className="rounded-circle">&nbsp;</span>
+                    </div>
+                    <div className="col col-lg-4 col-sm-4 text-center mb-4 is-loading">
+                      <span className="rounded-circle">&nbsp;</span>
+                    </div>
+                  </>
+                )}
               </div>
-              {/* <div className="row justify-content-center home-category-icons">
-                <div className="col col-lg-4 col-sm-4 text-center mb-4 is-loading">
-                  <span className="rounded-circle">&nbsp;</span>
-                </div>
-                <div className="col col-lg-4 col-sm-4 text-center mb-4 is-loading">
-                  <span className="rounded-circle">&nbsp;</span>
-                </div>
-                <div className="col col-lg-4 col-sm-4 text-center mb-4 is-loading">
-                  <span className="rounded-circle">&nbsp;</span>
-                </div>
-                <div className="col col-lg-4 col-sm-4 text-center mb-4 is-loading">
-                  <span className="rounded-circle">&nbsp;</span>
-                </div>
-                <div className="col col-lg-4 col-sm-4 text-center mb-4 is-loading">
-                  <span className="rounded-circle">&nbsp;</span>
-                </div>
-                <div className="col col-lg-4 col-sm-4 text-center mb-4 is-loading">
-                  <span className="rounded-circle">&nbsp;</span>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>

@@ -8,6 +8,7 @@ import HowItWorks from "./pages/HowItWorks";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Contact from "./pages/Contact";
+import Occasion from "./pages/Occasion";
 
 function App() {
   return (
@@ -16,12 +17,16 @@ function App() {
         <Route path="/" element={<MainLayout />}>
           <Route path="/" element={<Landing />} />
           <Route path="/my-envelopes" element={<Envelopes />} />
+
+          <Route path="occasion">
+            <Route path=":id" element={<Occasion />} />
+          </Route>
         </Route>
         <Route path="/" element={<MainLayout withDeco />}>
-          <Route path="/how-it-works" element={<HowItWorks />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="how-it-works" element={<HowItWorks />} />
+          <Route path="privacy" element={<Privacy />} />
+          <Route path="terms" element={<Terms />} />
+          <Route path="contact" element={<Contact />} />
         </Route>
       </Routes>
     </Router>
