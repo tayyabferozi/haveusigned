@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import kebabize from "../../utils/kebabize";
 
 const Occasion = () => {
   const { id } = useParams();
@@ -13,10 +14,18 @@ const Occasion = () => {
   useEffect(() => {
     setIsLoading(true);
 
-    axios.get(`/occasions/${id}/cards`).then((res) => {
-      setCardsData(res.data.cards);
-      setTitle(res.data.occasionName);
-    });
+    axios
+      .get(`/occasions/${id}/cards`)
+      .then((res) => {
+        setCardsData(res.data.cards);
+        setTitle(res.data.occasionName);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
 
     // setCardsData([
     //   {
@@ -44,8 +53,6 @@ const Occasion = () => {
     //     cardName: "Birthday",
     //   },
     // ]);
-
-    setIsLoading(false);
   }, [id]);
 
   return (
@@ -76,7 +83,9 @@ const Occasion = () => {
                           >
                             <Link to="">
                               <img
-                                src={`/assets/images/cards/${title.toLowerCase()}/${cardImageFileName}`}
+                                src={`/assets/images/cards/${kebabize(
+                                  title
+                                )}/${cardImageFileName}`}
                                 alt={cardName}
                               />
                               <span>{cardName}</span>

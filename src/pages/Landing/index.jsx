@@ -23,9 +23,17 @@ const Landing = () => {
   useEffect(() => {
     setIsLoading(true);
 
-    axios.get("/occasions").then((res) => {
-      setCardsData(res.data.occasions);
-    });
+    axios
+      .get("/occasions")
+      .then((res) => {
+        setCardsData(res.data.occasions);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
 
     // setCardsData([
     //   {
@@ -53,8 +61,6 @@ const Landing = () => {
     //     title: "New Home",
     //   },
     // ]);
-
-    setIsLoading(false);
   }, []);
 
   return (
