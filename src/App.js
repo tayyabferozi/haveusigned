@@ -1,36 +1,34 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./App.css";
-import MainLayout from "./layouts/MainLayout";
-import Landing from "./pages/Landing";
-import Envelopes from "./pages/Envelopes";
-import HowItWorks from "./pages/HowItWorks";
-import Privacy from "./pages/Privacy";
-import Terms from "./pages/Terms";
-import Contact from "./pages/Contact";
-import Occasion from "./pages/Occasion";
+import { setAuth } from "./store/authSlice";
+import getAccessToken from "./utils/getAccessToken";
+import Routes from "./Routes";
+import FullPageLoader from "./components/FullPageLoader";
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<MainLayout />}>
-          <Route path="/" element={<Landing />} />
-          <Route path="/my-envelopes" element={<Envelopes />} />
+  const { isAuthSet } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
-          <Route path="occasion">
-            <Route path=":id" element={<Occasion />} />
-          </Route>
-        </Route>
-        <Route path="/" element={<MainLayout withDeco />}>
-          <Route path="how-it-works" element={<HowItWorks />} />
-          <Route path="privacy" element={<Privacy />} />
-          <Route path="terms" element={<Terms />} />
-          <Route path="contact" element={<Contact />} />
-        </Route>
-      </Routes>
-    </Router>
-  );
+  axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
+
+  useEffect(() => {
+    getAccessToken()
+      .then((data) => {
+        dispatch(setAuth({ ...data, isAuthSet: true }));
+      })
+      .catch((err) => {
+        dispatch(setAuth({ isAuthSet: true }));
+      });
+  }, [dispatch]);
+
+  if (isAuthSet) {
+    return <Routes />;
+  } else {
+    return <FullPageLoader />;
+  }
 }
 
 export default App;

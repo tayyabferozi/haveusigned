@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -6,6 +7,15 @@ import HomeVideo from "../../components/HomeVideo";
 import Features from "./Features";
 // import Testimonials from "./Testimonials";
 
+const HARDCODED_IMGS = [
+  "./assets/images/categories/v2/birthday.png",
+  "./assets/images/categories/v2/leaving.png",
+  "./assets/images/categories/v2/new-baby.png",
+  "./assets/images/categories/v2/wedding.png",
+  "./assets/images/categories/v2/retirement.png",
+  "./assets/images/categories/v2/new-home.png",
+];
+
 const Landing = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [cardsData, setCardsData] = useState([]);
@@ -13,32 +23,36 @@ const Landing = () => {
   useEffect(() => {
     setIsLoading(true);
 
-    setCardsData([
-      {
-        img: "./assets/images/categories/v2/birthday.png",
-        title: "Birthday",
-      },
-      {
-        img: "./assets/images/categories/v2/leaving.png",
-        title: "Leaving",
-      },
-      {
-        img: "./assets/images/categories/v2/new-baby.png",
-        title: "New Baby",
-      },
-      {
-        img: "./assets/images/categories/v2/wedding.png",
-        title: "Wedding",
-      },
-      {
-        img: "./assets/images/categories/v2/retirement.png",
-        title: "Retirement",
-      },
-      {
-        img: "./assets/images/categories/v2/new-home.png",
-        title: "New Home",
-      },
-    ]);
+    axios.get("/occasions").then((res) => {
+      setCardsData(res.data.occasions);
+    });
+
+    // setCardsData([
+    //   {
+    //     img: "./assets/images/categories/v2/birthday.png",
+    //     title: "Birthday",
+    //   },
+    //   {
+    //     img: "./assets/images/categories/v2/leaving.png",
+    //     title: "Leaving",
+    //   },
+    //   {
+    //     img: "./assets/images/categories/v2/new-baby.png",
+    //     title: "New Baby",
+    //   },
+    //   {
+    //     img: "./assets/images/categories/v2/wedding.png",
+    //     title: "Wedding",
+    //   },
+    //   {
+    //     img: "./assets/images/categories/v2/retirement.png",
+    //     title: "Retirement",
+    //   },
+    //   {
+    //     img: "./assets/images/categories/v2/new-home.png",
+    //     title: "New Home",
+    //   },
+    // ]);
 
     setIsLoading(false);
   }, []);
@@ -62,16 +76,16 @@ const Landing = () => {
               <div className="row justify-content-center home-category-icons">
                 {!isLoading ? (
                   cardsData.map((el, idx) => {
-                    const { img, title } = el;
+                    const { occasionId, occasionName } = el;
 
                     return (
                       <div
-                        key={"landing-cards" + idx}
+                        key={occasionId}
                         className="col-12 col-lg-4 col-sm-6 text-center mb-4"
                       >
-                        <Link to="/occasion/Ll7xmO">
-                          <img src={img} alt={title} />
-                          <span>{title}</span>
+                        <Link to={`/occasion/${occasionId}`}>
+                          <img src={HARDCODED_IMGS[idx]} alt={occasionName} />
+                          <span>{occasionName}</span>
                         </Link>
                       </div>
                     );
