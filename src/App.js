@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
-import "./App.css";
 import { setAuth } from "./store/authSlice";
 import getAccessToken from "./utils/getAccessToken";
 import Routes from "./Routes";

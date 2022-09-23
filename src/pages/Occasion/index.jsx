@@ -26,33 +26,6 @@ const Occasion = () => {
       .finally(() => {
         setIsLoading(false);
       });
-
-    // setCardsData([
-    //   {
-    //     img: "/assets/images/cards/birthday/01-bday-001.png",
-    //     cardName: "Birthday",
-    //   },
-    //   {
-    //     img: "/assets/images/cards/birthday/01-bday-002.png",
-    //     cardName: "Birthday",
-    //   },
-    //   {
-    //     img: "/assets/images/cards/birthday/01-bday-003.png",
-    //     cardName: "Birthday",
-    //   },
-    //   {
-    //     img: "/assets/images/cards/birthday/01-bday-004.png",
-    //     cardName: "Birthday",
-    //   },
-    //   {
-    //     img: "/assets/images/cards/birthday/01-bday-005.png",
-    //     cardName: "Birthday",
-    //   },
-    //   {
-    //     img: "/assets/images/cards/birthday/01-bday-006.png",
-    //     cardName: "Birthday",
-    //   },
-    // ]);
   }, [id]);
 
   return (

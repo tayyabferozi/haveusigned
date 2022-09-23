@@ -34,33 +34,6 @@ const Landing = () => {
       .finally(() => {
         setIsLoading(false);
       });
-
-    // setCardsData([
-    //   {
-    //     img: "./assets/images/categories/v2/birthday.png",
-    //     title: "Birthday",
-    //   },
-    //   {
-    //     img: "./assets/images/categories/v2/leaving.png",
-    //     title: "Leaving",
-    //   },
-    //   {
-    //     img: "./assets/images/categories/v2/new-baby.png",
-    //     title: "New Baby",
-    //   },
-    //   {
-    //     img: "./assets/images/categories/v2/wedding.png",
-    //     title: "Wedding",
-    //   },
-    //   {
-    //     img: "./assets/images/categories/v2/retirement.png",
-    //     title: "Retirement",
-    //   },
-    //   {
-    //     img: "./assets/images/categories/v2/new-home.png",
-    //     title: "New Home",
-    //   },
-    // ]);
   }, []);
 
   return (
