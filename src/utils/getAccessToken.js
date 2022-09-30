@@ -3,16 +3,22 @@ import axios from "axios";
 const getAccessToken = async function () {
   try {
     const storedData = JSON.parse(localStorage.getItem("HYS_AUTH_DATA"));
+    if (storedData) {
+      const tokenTimeObj = new Date(storedData.time);
+      const tokenTime = tokenTimeObj.getTime();
+      const tokenTimeMin = tokenTime / (1000 * 60);
 
-    const storedDataTime = new Date(storedData.time);
-    const timeNow = new Date();
-    // const validityTime = new Date()
+      const tokenValidityTimeMin = tokenTimeMin + 15;
+      const tokenValidityTimeObj = new Date(tokenValidityTimeMin * (1000 * 60));
+      const tokenValidityTime = tokenValidityTimeObj.getTime();
 
-    // if (storedDataTime.getTime() < timeNow.getTime()) {
-    //   return storedData.token;
-    // }
+      const nowTimeObj = new Date();
+      const nowTime = nowTimeObj.getTime();
 
-    // console.log(storedDataTime.getTime() - timeNow.getTime());
+      if (nowTime < tokenValidityTime) {
+        return storedData.data;
+      }
+    }
 
     const { data } = await axios.get(
       `/token?clientId=${process.env.REACT_APP_CLIENT_ID}&clientName=${process.env.REACT_APP_CLIENT_NAME}`
@@ -21,7 +27,7 @@ const getAccessToken = async function () {
     localStorage.setItem(
       "HYS_AUTH_DATA",
       JSON.stringify({
-        accessToken: data.accessToken,
+        data,
         time: new Date(),
       })
     );

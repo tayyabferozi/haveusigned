@@ -1,8 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authSlice from "./authSlice";
+
+import auth from "./slices/auth";
+import cardBuilder from "./slices/cardBuilder";
 
 export default configureStore({
   reducer: {
-    auth: authSlice,
+    auth,
+    cardBuilder,
   },
 });

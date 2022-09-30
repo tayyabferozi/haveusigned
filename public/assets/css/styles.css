@@ -21871,7 +21871,7 @@ is-loading span.rounded {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
 
 .lds-default {
@@ -21884,7 +21884,7 @@ is-loading span.rounded {
   position: absolute;
   width: 6px;
   height: 6px;
-  background: #9C27B0;
+  background: #9c27b0;
   border-radius: 50%;
   animation: lds-default 1.2s linear infinite;
 }
@@ -21949,10 +21949,327 @@ is-loading span.rounded {
   left: 62px;
 }
 @keyframes lds-default {
-  0%, 20%, 80%, 100% {
+  0%,
+  20%,
+  80%,
+  100% {
     transform: scale(1);
   }
   50% {
     transform: scale(1.5);
   }
+}
+
+textarea.form-control {
+  margin-top: 0.5rem;
+}
+
+textarea.form-control:focus {
+  border: 1px solid var(--v-secondary-base);
+  box-shadow: 0 0 3px 0 var(--v-secondary-base);
+}
+
+/*********************
+   Order Page
+   specific styling
+   ********************/
+
+section.order h1 {
+  font-size: 35px;
+  margin-bottom: 20px;
+}
+@media (max-width: 767px) {
+  section.order h1 {
+    font-size: 24px;
+    margin-top: 50px;
+  }
+}
+section.order .steps {
+  width: 100%;
+  list-style: none;
+  margin: auto;
+  padding: 0;
+  display: table;
+  margin-top: 30px;
+  margin-bottom: 80px;
+}
+@media (max-width: 767px) {
+  section.order .steps {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: -20px;
+    width: 60%;
+  }
+}
+section.order .steps li {
+  display: table-cell;
+  color: #574949;
+  font-size: 16px;
+  position: relative;
+  cursor: pointer;
+}
+section.order .steps li:before {
+  content: " ";
+  position: absolute;
+  border-radius: 50%;
+  border: solid 1px #251f1f;
+  width: 20px;
+  height: 20px;
+  bottom: -30px;
+  left: 0px;
+  right: 0px;
+  margin: auto;
+  transition: 0.4s ease;
+}
+section.order .steps li.active:before {
+  background-color: var(--v-primary-base);
+  border-color: var(--v-primary-base);
+}
+section.order .steps li:after {
+  content: " ";
+  position: absolute;
+  width: 50%;
+  bottom: -20px;
+  right: 0px;
+  border-bottom: 1px solid transparent;
+  transition: 0.4s ease;
+}
+section.order .steps li.active:after {
+  border-bottom-color: var(--v-primary-base);
+}
+section.order .steps li.active.active.last:after {
+  display: none;
+}
+@media (max-width: 767px) {
+  section.order .steps li {
+    font-size: 0px;
+  }
+  section.order .steps li:before {
+    width: 90%;
+    height: 4px;
+    border-radius: 50px;
+    background-color: #ccc;
+    border: none;
+  }
+  section.order .steps li:after {
+    display: none;
+  }
+}
+section.order .steps li.past:before {
+  background-color: var(--v-primary-base);
+  border-color: var(--v-primary-base);
+}
+section.order .steps li.past:after {
+  content: " ";
+  position: absolute;
+  width: 100%;
+  bottom: -20px;
+  left: 50%;
+  border-bottom: 1px solid var(--v-primary-base);
+}
+section.order form {
+  width: 50%;
+  margin: auto;
+}
+@media (max-width: 767px) {
+  section.order form {
+    width: 100%;
+    margin-top: 1rem !important;
+  }
+}
+section.order .review {
+  text-align: left;
+  width: 50%;
+  margin: auto;
+}
+section.order .review label {
+  text-align: left;
+  display: block;
+  font-size: 20px;
+  color: #9a9a9a;
+  margin: 20px 0;
+}
+section.order .review label span {
+  display: inline-block;
+  margin-left: 10px;
+  color: #574949;
+}
+section.order .review label a {
+  color: #9a9a9a;
+  text-decoration: none;
+}
+@media (max-width: 767px) {
+  section.order .review {
+    width: 95%;
+    font-size: 15px;
+  }
+  section.order .review label {
+    font-size: 15px;
+  }
+}
+section.order .recipient-table {
+  text-align: center;
+  border-radius: 12px;
+  margin: auto;
+  font-size: 16px;
+  font-weight: 400;
+  overflow: hidden;
+  width: 50%;
+}
+@media (max-width: 767px) {
+  section.order .recipient-table {
+    width: 100%;
+  }
+}
+section.order .recipient-table th,
+section.order .recipient-table td {
+  padding: 20px;
+  width: 50%;
+  background-color: #ededed;
+}
+section.order .recipient-table th:nth-child(even),
+section.order .recipient-table td:nth-child(even) {
+  border-left: 1px solid #b3b3b3;
+}
+@media (max-width: 767px) {
+  section.order .recipient-table th,
+  section.order .recipient-table td {
+    padding: 10px 5px;
+  }
+}
+section.order .recipient-table th {
+  background-color: #cccccc;
+  color: #fff;
+  font-weight: 300;
+}
+section.order .thankyou {
+  font-size: 20px;
+  font-weight: 200;
+}
+section.order .thankyou h1 {
+  color: var(--v-primary-base);
+  margin-top: 10%;
+}
+@media (max-width: 767px) {
+  section.order .thankyou {
+    font-size: 15px;
+  }
+}
+section.order .add-button a {
+  display: block !important;
+  background: var(--v-primary-base);
+  color: #fff;
+  border-radius: 50%;
+  padding: 20px;
+  margin: auto;
+  margin-bottom: 20px;
+  width: -webkit-fit-content !important;
+  width: -moz-fit-content !important;
+  width: fit-content !important;
+}
+section.order .add-button a i {
+  left: 1px;
+  right: 0px;
+  top: 7px;
+  bottom: 0px;
+}
+
+.fa-trash,
+.fa-pencil {
+  cursor: pointer;
+  transition: 0.4s ease;
+}
+
+.fa-trash:hover {
+  color: var(--danger);
+}
+
+.error-msg {
+  color: red;
+  font-size: 12px;
+}
+
+/* The container */
+.checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkbox-container .checkmark {
+  position: absolute !important;
+  padding: 0 !important;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+.checkbox-container .checkmark::before {
+  display: none !important;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-container input:checked ~ .checkmark {
+  background-color: var(--v-primary-base);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkbox-container .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-container .checkmark:after {
+  left: 8px !important;
+  top: 0px !important;
+  width: 8px !important;
+  height: 15px !important;
+  border: solid white !important;
+  border-width: 0 3px 3px 0 !important;
+  transform: rotate(45deg) !important;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }

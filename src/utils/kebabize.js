@@ -1,10 +1,10 @@
 const kebabize = (str) => {
   return str
-    .split(" ")
-    .map((letter, idx) => {
+    ?.split(" ")
+    ?.map((letter, idx) => {
       return letter.toLowerCase();
     })
-    .join("-");
+    ?.join("-");
 };
 
 export default kebabize;

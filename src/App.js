@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
-import { setAuth } from "./store/authSlice";
+import { setAuth } from "./store/slices/auth";
 import getAccessToken from "./utils/getAccessToken";
 import Routes from "./Routes";
 import FullPageLoader from "./components/FullPageLoader";
