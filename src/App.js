@@ -2,28 +2,22 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
-import { setAuth } from "./store/slices/auth";
-import getAccessToken from "./utils/getAccessToken";
+import { getAccessToken } from "./store/slices/auth";
 import Routes from "./Routes";
 import FullPageLoader from "./components/FullPageLoader";
+import STASUSES from "./store/slices/enums";
 
 function App() {
-  const { isAuthSet } = useSelector((state) => state.auth);
+  const { status } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
   useEffect(() => {
-    getAccessToken()
-      .then((data) => {
-        dispatch(setAuth({ ...data, isAuthSet: true }));
-      })
-      .catch((err) => {
-        dispatch(setAuth({ isAuthSet: true }));
-      });
+    dispatch(getAccessToken());
   }, [dispatch]);
 
-  if (isAuthSet) {
+  if (status === STASUSES.SUCCESS) {
     return <Routes />;
   } else {
     return <FullPageLoader />;
