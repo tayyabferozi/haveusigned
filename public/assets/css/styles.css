@@ -22273,3 +22273,251 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+/****************** 
+        Masonry
+  ******************/
+
+
+.masonry {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.masonry--h {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+}
+
+.masonry--v {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+}
+
+.masonry--h,
+.masonry--v {
+  margin-left: -1em;
+  /* Adjustment for the gutter */
+  counter-reset: brick;
+}
+
+.masonry-brick {
+  margin: 0 0 1em 1em;
+  /* Some Gutter */
+  position: relative;
+  text-align: left;
+  padding: 1em;
+}
+
+.masonry-brick--h {
+  -webkit-box-flex: 1;
+      -ms-flex: auto;
+          flex: auto;
+  min-width: 150px;
+}
+
+@media only screen and (min-width: 1024px) {
+  /* Horizontal masonry bricks on desktop-sized screen */
+  .masonry-brick--h:nth-child(4n+1) {
+    width: 250px;
+  }
+
+  .masonry-brick--h:nth-child(4n+2) {
+    width: 325px;
+  }
+
+  .masonry-brick--h:nth-child(4n+3) {
+    width: 180px;
+  }
+
+  .masonry-brick--h:nth-child(4n+4) {
+    width: 380px;
+  }
+
+  /* Adjusting vertical masonry height on desktop-sized screen */
+  .masonry--v {
+    max-height: 800px;
+    overflow-y: auto;
+  }
+
+  /* Vertical masonry bricks on desktop-sized screen */
+  .masonry-brick--v {
+    width: 31.33333%;
+  }
+}
+@media only screen and (max-width: 1023px) and (min-width: 768px) {
+  /* Horizontal masonry bricks on tabled-sized screen */
+  .masonry-brick--h:nth-child(4n+1) {
+    width: 200px;
+  }
+
+  .masonry-brick--h:nth-child(4n+2) {
+    width: 250px;
+  }
+
+  .masonry-brick--h:nth-child(4n+3) {
+    width: 120px;
+  }
+
+  .masonry-brick--h:nth-child(4n+4) {
+    width: 280px;
+  }
+
+  /* Adjusting vertical masonry height on tablet-sized screen */
+  .masonry--v {
+    max-height: 2000px;
+  }
+
+  /* Vertical masonry bricks on tablet-sized screen */
+  .masonry-brick--v {
+    width: 50%;
+  }
+}
+
+/*********************
+   Account Pages
+   specific styling
+   ********************/
+section.accounts {
+  font-size: 18px;
+}
+@media (max-width: 767px) {
+  section.accounts {
+    font-size: 14px;
+    font-weight: 300;
+  }
+}
+section.accounts h1 {
+  font-size: 42px;
+}
+@media (max-width: 767px) {
+  section.accounts h1 {
+    font-size: 24px;
+    margin-top: 0px !important;
+  }
+}
+section.accounts p {
+  font-size: 18px;
+  font-weight: 300;
+}
+@media (max-width: 767px) {
+  section.accounts p {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+}
+section.accounts .forgot-password {
+  color: #007aff;
+  margin-top: -20px;
+}
+@media (max-width: 767px) {
+  section.accounts .card {
+    border-radius: 12px;
+    padding: 20px !important;
+  }
+}
+section.accounts .envelop-summary {
+  font-size: 20px;
+  font-weight: 300;
+  list-style: none;
+}
+section.accounts .envelop-summary i {
+  display: inline-block;
+  margin-right: 20px;
+  margin-left: -45px;
+}
+section.accounts .envelop-summary li {
+  margin-bottom: 15px;
+}
+section.accounts .envelop-summary strong {
+  font-weight: 600;
+}
+@media (max-width: 767px) {
+  section.accounts .envelop-summary {
+    font-size: 14px;
+    padding-left: 22px;
+  }
+  section.accounts .envelop-summary i {
+    margin-right: 7px;
+    margin-left: -25px;
+  }
+  section.accounts .envelop-summary li {
+    margin-bottom: 10px;
+  }
+}
+section.accounts .envelope-messages .card {
+  border-radius: 12px;
+  text-align: left;
+  border: none;
+}
+section.accounts .envelope-messages p {
+  font-size: 18px;
+}
+section.accounts .envelope-messages .email {
+  font-size: 16px;
+  color: #bdbdbd;
+  display: block;
+  margin: 8px 0 18px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+section.accounts .envelope-messages .email i {
+  margin-right: 6px;
+  font-size: 13px;
+}
+@media (max-width: 767px) {
+  section.accounts .envelope-messages .card {
+    height: auto;
+    margin-bottom: 10px;
+  }
+  section.accounts .envelope-messages .email {
+    font-size: 14px;
+    margin: 5px 0 10px 0;
+  }
+  section.accounts .envelope-messages .email i {
+    font-size: 12px;
+  }
+  section.accounts .envelope-messages strong {
+    font-size: 15px;
+  }
+  section.accounts .envelope-messages p {
+    font-size: 14px;
+  }
+}
+section.accounts.signatory .card {
+  padding: 20px;
+}
+section.accounts.signatory .reply-all {
+  color: #fc7c23;
+}
+
+.font-square-peg {
+  font-family: 'Square Peg', cursive;
+  font-size: 28px !important;
+}
+
+.option-button {
+  height: 40px !important;
+  width: 115px !important;
+  margin-bottom: 0 !important;
+  /* display: inline-block;
+  border-radius: 12px;
+  border: solid 1px #ccc;
+  background-color: #ededed;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: 500;
+  color: #9a9a9a;
+  width: 70px; */
+}
+
+.Toastify__toast-body * {
+  font-size: 12px;
+}

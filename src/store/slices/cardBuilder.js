@@ -26,13 +26,13 @@ const initialState = {
     forRecipientEmailAddress: "",
     cardToBeReturnedByDate: "",
     ownerMessage: "",
-    wantsToDonate: true,
+    notWantsToDonate: false,
     ownerDonationAmount: "",
     Cost: "",
     participators: [],
   },
   createdEnvelope: {
-    state: STASUSES.IDLE,
+    status: STASUSES.IDLE,
   },
 };
 
@@ -97,32 +97,34 @@ const cardBuilderSlice = createSlice({
 
     // CASES FOR FETCH CARD
 
-    builder.addCase(fetchCard.pending, (state, action) => {
-      state.card.state = STASUSES.LOADING;
-    });
-
-    builder.addCase(fetchCard.fulfilled, (state, action) => {
-      state.card.data = action.payload;
-      state.card.state = STASUSES.SUCCESS;
-    });
-    builder.addCase(fetchCard.rejected, (state, action) => {
-      state.card.state = STASUSES.ERROR;
-    });
+    builder
+      .addCase(fetchCard.pending, (state, action) => {
+        state.card.state = STASUSES.LOADING;
+      })
+      .addCase(fetchCard.fulfilled, (state, action) => {
+        state.card.data = action.payload;
+        state.card.state = STASUSES.SUCCESS;
+      })
+      .addCase(fetchCard.rejected, (state, action) => {
+        state.card.state = STASUSES.ERROR;
+      });
 
     // CASES FOR CREATE ENVELOPE
 
-    builder.addCase(createEnvelope.pending, (state, action) => {
-      state.createdEnvelope.state = STASUSES.LOADING;
-    });
-
-    builder.addCase(createEnvelope.fulfilled, (state, action) => {
-      state.createdEnvelope.data = action.payload;
-      state.createdEnvelope.state = STASUSES.SUCCESS;
-      action.payload.cb && action.payload.cb();
-    });
-    builder.addCase(createEnvelope.rejected, (state, action) => {
-      state.createdEnvelope.state = STASUSES.ERROR;
-    });
+    builder
+      .addCase(createEnvelope.pending, (state, action) => {
+        state.createdEnvelope.status = STASUSES.LOADING;
+      })
+      .addCase(createEnvelope.fulfilled, (state, action) => {
+        state.createdEnvelope.data = action.payload;
+        state.createdEnvelope.status = STASUSES.SUCCESS;
+        action.payload.cb && action.payload.cb();
+      })
+      .addCase(createEnvelope.rejected, (state, action) => {
+        state.createdEnvelope.status = STASUSES.ERROR;
+        action?.payload?.cb &&
+          action.payload.cb("error", action.payload.errors);
+      });
   },
 });
 
@@ -170,10 +172,35 @@ export const fetchCard = createAsyncThunk(
 
 export const createEnvelope = createAsyncThunk(
   "cardBuilder/createEnvelope",
-  async (formData) => {
-    const { data } = await axios.get(`/envelopes`, formData);
-    data.cb = formData.cb;
+  async ({ formData, cb }, { rejectWithValue }) => {
+    try {
+      const { data } = await axios.post(`/envelopes`, formData);
 
-    return data;
+      return { ...data, cb };
+    } catch (err) {
+      console.log(err);
+      // rejectWithValue();
+      return rejectWithValue({ ...err.response.data, cb });
+    }
   }
 );
+
+// export const createEnvelope = createAsyncThunk(
+//   "cardBuilder/createEnvelope",
+//   ({ formData, cb }, { rejectWithValue }) => {
+//     // try {
+//     rejectWithValue({ error: "msg" });
+//     const { data, status } = axios
+//       .post(`/envelopes`, formData)
+//       .then((res) => {
+//         console.log(data);
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//         rejectWithValue({ error: "msg" });
+//       });
+//     // } catch (err) {
+//     //   rejectWithValue({ ...err.response.data, cb });
+//     // }
+//   }
+// );

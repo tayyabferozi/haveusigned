@@ -12,6 +12,8 @@ import Occasion from "./pages/Occasion";
 import EnvelopeMessage from "./pages/EnvelopeMessage";
 import EnvelopeDetails from "./pages/EnvelopeDetails";
 import EnvelopeCreated from "./pages/EnvelopeCreated";
+import SignatoryThanks from "./pages/SignatoryThanks/SignatoryThanks";
+import Envelope from "./pages/Envelope";
 
 const AppRoutes = () => {
   return (
@@ -21,6 +23,8 @@ const AppRoutes = () => {
           <Route index element={<Landing />} />
           <Route path="my-envelopes" element={<Envelopes />} />
           <Route path="envelope-created" element={<EnvelopeCreated />} />
+          <Route path="signatory-thanks" element={<SignatoryThanks />} />
+          <Route path="envelope" element={<Envelope />} />
 
           <Route path="occasion">
             <Route path=":occasionId">

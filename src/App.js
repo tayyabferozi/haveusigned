@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { getAccessToken } from "./store/slices/auth";
 import Routes from "./Routes";
@@ -18,7 +20,12 @@ function App() {
   }, [dispatch]);
 
   if (status === STASUSES.SUCCESS) {
-    return <Routes />;
+    return (
+      <>
+        <ToastContainer />
+        <Routes />
+      </>
+    );
   } else {
     return <FullPageLoader />;
   }

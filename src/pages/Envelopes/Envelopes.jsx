@@ -2,8 +2,8 @@ import React from "react";
 
 const Envelopes = () => {
   return (
-    <main className="container inner-wrap max-md pb-5 mb-5">
-      <section className="space-top space-top-short-sm pb-5" id="hiw">
+    <main className="container max-md pb-5 mb-5">
+      <section className="space-top pb-5" id="hiw">
         <h3 className="title-contact use-text-title use-text-primary pb-3 text-center">
           My Envelope
         </h3>

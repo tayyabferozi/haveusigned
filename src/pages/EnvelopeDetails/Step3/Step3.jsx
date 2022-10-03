@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import Input from "../../../components/Input";
 import { setEnvelopeDetails } from "../../../store/slices/cardBuilder";
 
+const donationOptions = [2, 5, 10];
+
 const Step3 = ({ errorsState }) => {
   const { envelopeInputDetails } = useSelector((state) => state.cardBuilder);
   const dispatch = useDispatch();
@@ -11,7 +13,11 @@ const Step3 = ({ errorsState }) => {
   const inputChangeHandler = (e) => {
     let { name, value, checked } = e.target;
 
-    if (name === "wantsToDonate") {
+    if (name === "donation") {
+      name = "";
+    }
+
+    if (name === "notWantsToDonate") {
       value = checked;
     }
 
@@ -39,26 +45,73 @@ const Step3 = ({ errorsState }) => {
       />
 
       <label className="checkbox-container my-4">
-        I do want to donate
+        I do not want to donate
         <input
-          name="wantsToDonate"
+          name="notWantsToDonate"
           type="checkbox"
-          // defaultChecked={envelopeInputDetails.wantsToDonate}
+          // defaultChecked={envelopeInputDetails.notWantsToDonate}
+          checked={envelopeInputDetails.notWantsToDonate}
           onChange={inputChangeHandler}
         />
         <span className="checkmark"></span>
       </label>
 
-      {envelopeInputDetails.wantsToDonate && (
-        <Input
-          type="number"
-          label="and my donation is..."
-          name="ownerDonationAmount"
-          placeholder="Enter your donation amount"
-          value={envelopeInputDetails.ownerDonationAmount}
-          onChange={inputChangeHandler}
-          errorMsg={errorsState.ownerDonationAmount}
-        />
+      <label className="my-3">and my donation is...</label>
+
+      {!envelopeInputDetails.notWantsToDonate && (
+        <>
+          {/* <Input
+            type="number"
+            label="and my donation is..."
+            name="ownerDonationAmount"
+            placeholder="Enter your donation amount"
+            value={envelopeInputDetails.ownerDonationAmount}
+            onChange={inputChangeHandler}
+            errorMsg={errorsState.ownerDonationAmount}
+          /> */}
+          <div className="d-flex align-items-center">
+            <div className="radio-toolbar flex-shrink-0">
+              {donationOptions.map((el, idx) => {
+                return (
+                  <React.Fragment>
+                    <input
+                      type="radio"
+                      id={"donation_" + el}
+                      name="ownerDonationAmount"
+                      value={el}
+                      checked={
+                        +envelopeInputDetails.ownerDonationAmount === +el
+                      }
+                      onChange={inputChangeHandler}
+                    />
+                    <label className="me-2" for={"donation_" + el}>
+                      £{el}
+                    </label>
+                  </React.Fragment>
+                );
+              })}
+            </div>
+            <input
+              className="option-button ms-3"
+              type="number"
+              name="ownerDonationAmount"
+              placeholder="£ other"
+              value={
+                donationOptions.includes(
+                  +envelopeInputDetails.ownerDonationAmount
+                )
+                  ? ""
+                  : envelopeInputDetails.ownerDonationAmount
+              }
+              onChange={inputChangeHandler}
+            />
+          </div>
+          {errorsState.ownerDonationAmount && (
+            <div className="error-msg mb-3">
+              {errorsState.ownerDonationAmount}
+            </div>
+          )}
+        </>
       )}
 
       {/* <div className="form-control"> */}

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import clsx from "clsx";
+import { toast } from "react-toastify";
 
 import Button from "../../components/Button/Button";
 import Step1 from "./Step1";
@@ -11,6 +12,8 @@ import Step4 from "./Step4";
 import Step5 from "./Step5";
 import { createEnvelope } from "../../store/slices/cardBuilder";
 import isEmpty from "../../utils/isEmpty";
+import MainSection from "../../layouts/MainSection/MainSection";
+import STATUSES from "../../store/slices/enums";
 
 const stepLables = ["My Details", "Recipient", "Delivery", "Share", "Confirm"];
 
@@ -19,7 +22,9 @@ const EnvelopeDetails = () => {
 
   const { cardId } = useParams();
 
-  const { envelopeInputDetails } = useSelector((state) => state.cardBuilder);
+  const { createdEnvelope, envelopeInputDetails } = useSelector(
+    (state) => state.cardBuilder
+  );
   const dispatch = useDispatch();
 
   const [stepState, setStepState] = useState(0);
@@ -48,8 +53,6 @@ const EnvelopeDetails = () => {
       setErrorsState((prevState) => ({ ...prevState, [name]: "" }));
     });
   };
-
-  console.log(errorsState);
 
   const nextClickHandler = (e) => {
     e.preventDefault();
@@ -105,10 +108,11 @@ const EnvelopeDetails = () => {
         hasErrors = true;
         setError("cardToBeReturnedByDate", "Please enter a return date");
       }
-      if (isEmpty(envelopeInputDetails.ownerDonationAmount)) {
-        hasErrors = true;
-        setError("ownerDonationAmount", "Please enter your donation amount");
-      }
+      if (!envelopeInputDetails.notWantsToDonate)
+        if (isEmpty(envelopeInputDetails.ownerDonationAmount)) {
+          hasErrors = true;
+          setError("ownerDonationAmount", "Please enter your donation amount");
+        }
     }
 
     if (hasErrors) {
@@ -118,16 +122,22 @@ const EnvelopeDetails = () => {
     if (stepState === 4) {
       dispatch(
         createEnvelope({
-          ...envelopeInputDetails,
-          cardId,
-          cardMessage: envelopeInputDetails.ownerMessage,
-          cost: 2.5,
-          ownerDonationAmount: !envelopeInputDetails.wantsToDonate
-            ? 0
-            : envelopeInputDetails.ownerDonationAmount,
-          cb: () => navigate("/envelope-created"),
+          formData: {
+            ...envelopeInputDetails,
+            cardId,
+            cardMessage: envelopeInputDetails.ownerMessage,
+            Cost: 2.5,
+            ownerDonationAmount: envelopeInputDetails.notWantsToDonate
+              ? 1
+              : envelopeInputDetails.ownerDonationAmount,
+          },
+          cb: (state, errors) => {
+            if (state === "error") toast.error("Uh Oh! Something went wrong");
+            else navigate("/envelope-created");
+          },
         })
       );
+
       return;
     }
 
@@ -141,66 +151,63 @@ const EnvelopeDetails = () => {
   };
 
   return (
-    <main className="container-wrap">
-      <section className="space-top order" id="hiw">
-        <div className="">
-          <div className="container">
-            <div className="row text-center">
-              <div className="col-lg-12 col-sm-12">
-                <h1 className="text-left">Envelope details</h1>
+    <MainSection sectionClassName="order">
+      <div className="container">
+        <div className="row text-center">
+          <div className="col-lg-12 col-sm-12">
+            <h1 className="text-left">Envelope details</h1>
 
-                <ul className="steps">
-                  {stepLables.map((el, idx) => {
-                    return (
-                      <li
-                        className={clsx(
-                          idx === stepLables.length - 1 && "last",
-                          idx === stepState && "active",
-                          idx < stepState && "past"
-                        )}
-                        key={"step-label" + idx}
-                        onClick={() => setStepState(idx)}
-                      >
-                        {el}
-                      </li>
-                    );
-                  })}
-                </ul>
-
-                <form className="hys-form mt-5 text-left">
-                  {stepState === 0 && <Step1 errorsState={errorsState} />}
-                  {stepState === 1 && <Step2 errorsState={errorsState} />}
-                  {stepState === 2 && <Step3 errorsState={errorsState} />}
-                  {stepState === 3 && <Step4 errorsState={errorsState} />}
-                  {stepState === 4 && (
-                    <Step5
-                      errorsState={errorsState}
-                      setStepState={setStepState}
-                    />
-                  )}
-
-                  <div className="pt-5">
-                    {stepState > 0 && (
-                      <Button
-                        className="me-3"
-                        role="button"
-                        onClick={prevClickHandler}
-                      >
-                        Previous
-                      </Button>
+            <ul className="steps">
+              {stepLables.map((el, idx) => {
+                return (
+                  <li
+                    className={clsx(
+                      idx === stepLables.length - 1 && "last",
+                      idx === stepState && "active",
+                      idx < stepState && "past"
                     )}
+                    key={"step-label" + idx}
+                    onClick={() => setStepState(idx)}
+                  >
+                    {el}
+                  </li>
+                );
+              })}
+            </ul>
 
-                    <Button role="button" onClick={nextClickHandler}>
-                      Next
-                    </Button>
-                  </div>
-                </form>
+            <form className="hys-form mt-5 text-left">
+              {stepState === 0 && <Step1 errorsState={errorsState} />}
+              {stepState === 1 && <Step2 errorsState={errorsState} />}
+              {stepState === 2 && <Step3 errorsState={errorsState} />}
+              {stepState === 3 && <Step4 errorsState={errorsState} />}
+              {stepState === 4 && (
+                <Step5 errorsState={errorsState} setStepState={setStepState} />
+              )}
+
+              <div className="pt-5">
+                {stepState > 0 && (
+                  <Button
+                    className="me-3"
+                    role="button"
+                    onClick={prevClickHandler}
+                  >
+                    Previous
+                  </Button>
+                )}
+
+                <Button
+                  role="button"
+                  onClick={nextClickHandler}
+                  disabled={createdEnvelope.status === STATUSES.LOADING}
+                >
+                  {stepState === 4 ? "Submit" : "Next"}
+                </Button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </MainSection>
   );
 };
 
