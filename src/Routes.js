@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import MainLayout from "./layouts/MainLayout";
 import Landing from "./pages/Landing";
-import Envelopes from "./pages/Envelopes";
+import Envelopes from "./pages/MyEnvelopes";
 import HowItWorks from "./pages/HowItWorks";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";

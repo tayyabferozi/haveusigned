@@ -6,3 +6,5 @@ const STATUSES = Object.freeze({
 });
 
 export default STATUSES;
+
+export const HYS_ENV_AUTH = "HYS_ENV_AUTH";

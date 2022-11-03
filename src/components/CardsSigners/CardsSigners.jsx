@@ -38,13 +38,16 @@ const DUMMY_DATA = [
 const CardsSigners = () => {
   return (
     <>
-      <h5 class="text-left">The following people have signed this card:</h5>
+      <h5 className="text-left">The following people have signed this card:</h5>
       <br />
 
-      <div class="envelope-messages masonry masonry--v">
+      <div className="envelope-messages masonry masonry--v">
         {DUMMY_DATA.map((el, idx) => {
           return (
-            <div class="card masonry-brick masonry-brick--v">
+            <div
+              className="card masonry-brick masonry-brick--v"
+              key={"name" + idx}
+            >
               <p className="font-square-peg">{el.text}</p>
               <strong>{el.name}</strong>
             </div>

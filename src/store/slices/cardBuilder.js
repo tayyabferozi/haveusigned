@@ -179,28 +179,7 @@ export const createEnvelope = createAsyncThunk(
       return { ...data, cb };
     } catch (err) {
       console.log(err);
-      // rejectWithValue();
       return rejectWithValue({ ...err.response.data, cb });
     }
   }
 );
-
-// export const createEnvelope = createAsyncThunk(
-//   "cardBuilder/createEnvelope",
-//   ({ formData, cb }, { rejectWithValue }) => {
-//     // try {
-//     rejectWithValue({ error: "msg" });
-//     const { data, status } = axios
-//       .post(`/envelopes`, formData)
-//       .then((res) => {
-//         console.log(data);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//         rejectWithValue({ error: "msg" });
-//       });
-//     // } catch (err) {
-//     //   rejectWithValue({ ...err.response.data, cb });
-//     // }
-//   }
-// );
