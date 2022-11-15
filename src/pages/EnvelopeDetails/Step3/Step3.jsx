@@ -28,6 +28,7 @@ const Step3 = ({ errorsState }) => {
     <>
       <Input
         label="My password for this envelope is..."
+        type="password"
         name="ownerPassword"
         placeholder="Enter your password"
         value={envelopeInputDetails.ownerPassword}
@@ -43,18 +44,6 @@ const Step3 = ({ errorsState }) => {
         onChange={inputChangeHandler}
         errorMsg={errorsState.cardToBeReturnedByDate}
       />
-
-      <label className="checkbox-container my-4">
-        I do not want to donate
-        <input
-          name="notWantsToDonate"
-          type="checkbox"
-          // defaultChecked={envelopeInputDetails.notWantsToDonate}
-          checked={envelopeInputDetails.notWantsToDonate}
-          onChange={inputChangeHandler}
-        />
-        <span className="checkmark"></span>
-      </label>
 
       <label className="my-3">and my donation is...</label>
 
@@ -111,6 +100,18 @@ const Step3 = ({ errorsState }) => {
               {errorsState.ownerDonationAmount}
             </div>
           )}
+
+          <label className="checkbox-container my-4">
+            I do not want to donate
+            <input
+              name="notWantsToDonate"
+              type="checkbox"
+              // defaultChecked={envelopeInputDetails.notWantsToDonate}
+              checked={envelopeInputDetails.notWantsToDonate}
+              onChange={inputChangeHandler}
+            />
+            <span className="checkmark"></span>
+          </label>
         </>
       )}
 

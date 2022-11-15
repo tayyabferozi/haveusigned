@@ -8,14 +8,15 @@ import Button from "../../components/Button/Button";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 import Step3 from "./Step3";
-import Step4 from "./Step4";
+// import Step4 from "./Step4";
 import Step5 from "./Step5";
 import { createEnvelope } from "../../store/slices/cardBuilder";
 import isEmpty from "../../utils/isEmpty";
 import MainSection from "../../layouts/MainSection/MainSection";
 import STATUSES from "../../store/slices/enums";
+import isValidEmail from "../../utils/isValidEmail";
 
-const stepLables = ["My Details", "Recipient", "Delivery", "Share", "Confirm"];
+const stepLables = ["My Details", "Recipient", "Delivery", "Confirm"];
 
 const EnvelopeDetails = () => {
   const navigate = useNavigate();
@@ -70,6 +71,10 @@ const EnvelopeDetails = () => {
         hasErrors = true;
         setError("ownerEmailAddress", "Please enter your email");
       }
+      if (!isValidEmail(envelopeInputDetails.ownerEmailAddress)) {
+        hasErrors = true;
+        setError("ownerEmailAddress", "Please enter a valid email address");
+      }
     }
 
     if (stepState === 1) {
@@ -86,6 +91,13 @@ const EnvelopeDetails = () => {
       if (isEmpty(envelopeInputDetails.forRecipientEmailAddress)) {
         hasErrors = true;
         setError("forRecipientEmailAddress", "Please enter recipient's email");
+      }
+      if (!isValidEmail(envelopeInputDetails.forRecipientEmailAddress)) {
+        hasErrors = true;
+        setError(
+          "forRecipientEmailAddress",
+          "Please enter a valid email address"
+        );
       }
       if (isEmpty(envelopeInputDetails.ownerMessage)) {
         hasErrors = true;
@@ -119,7 +131,7 @@ const EnvelopeDetails = () => {
       return;
     }
 
-    if (stepState === 4) {
+    if (stepState === 3) {
       dispatch(
         createEnvelope({
           formData: {
@@ -167,7 +179,7 @@ const EnvelopeDetails = () => {
                       idx < stepState && "past"
                     )}
                     key={"step-label" + idx}
-                    onClick={() => setStepState(idx)}
+                    // onClick={() => setStepState(idx)}
                   >
                     {el}
                   </li>
@@ -179,8 +191,8 @@ const EnvelopeDetails = () => {
               {stepState === 0 && <Step1 errorsState={errorsState} />}
               {stepState === 1 && <Step2 errorsState={errorsState} />}
               {stepState === 2 && <Step3 errorsState={errorsState} />}
-              {stepState === 3 && <Step4 errorsState={errorsState} />}
-              {stepState === 4 && (
+              {/* {stepState === 3 && <Step4 errorsState={errorsState} />} */}
+              {stepState === 3 && (
                 <Step5 errorsState={errorsState} setStepState={setStepState} />
               )}
 

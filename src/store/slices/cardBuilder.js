@@ -27,7 +27,7 @@ const initialState = {
     cardToBeReturnedByDate: "",
     ownerMessage: "",
     notWantsToDonate: false,
-    ownerDonationAmount: "",
+    ownerDonationAmount: 5,
     Cost: "",
     participators: [],
   },

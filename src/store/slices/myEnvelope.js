@@ -91,7 +91,7 @@ export const envelopeAuth = createAsyncThunk(
   async ({ formState, envelopeId, cb }, { rejectWithValue }) => {
     try {
       await axios.post(`envelopes/${envelopeId}/authenticate`, formState, {
-        withCredentials: false,
+        withCredentials: true,
       });
       cb();
       return { envelopeId };
