@@ -105,7 +105,9 @@ export const envelopeAuth = createAsyncThunk(
 export const fetchEnvelope = createAsyncThunk(
   "myEnvelope/fetch",
   async (id) => {
-    const { data } = await axios.get(`envelopes/${id}`);
+    const { data } = await axios.get(`envelopes/${id}`, {
+      withCredentials: true,
+    });
     return data;
   }
 );

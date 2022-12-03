@@ -52,8 +52,11 @@ const Step5 = ({ setStepState }) => {
           />
         );
       })}
-      <div>
-        <i class="fa-solid fa-pencil me-2" onClick={() => setStepState(3)}></i>{" "}
+      {/* <div>
+        <i
+          className="fa-solid fa-pencil me-2"
+          onClick={() => setStepState(3)}
+        ></i>{" "}
         I want to cirulate this to:{" "}
         {envelopeInputDetails.participators.map((el, idx) => {
           return (
@@ -62,7 +65,7 @@ const Step5 = ({ setStepState }) => {
             </div>
           );
         })}
-      </div>
+      </div> */}
     </>
   );
 };

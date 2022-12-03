@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import STATUSES from "../../store/slices/enums";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
+import STATUSES from "../../store/slices/enums";
 import { envelopeAuth } from "../../store/slices/myEnvelope";
 
 const Envelopes = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const { status } = useSelector((state) => state.myEnvelope.auth);
   const dispatch = useDispatch();
@@ -14,7 +16,8 @@ const Envelopes = () => {
   const [formState, setFormState] = useState({
     userEmail: "",
     password: "",
-    envelopeId: "a9aoql",
+    // envelopeId: "a9aoql",
+    envelopeId: "",
   });
 
   const inputChangeHandler = (e) => {
@@ -37,6 +40,11 @@ const Envelopes = () => {
       })
     );
   };
+
+  useEffect(() => {
+    const id = searchParams.get("id");
+    if (id) setFormState((prevState) => ({ ...prevState, envelopeId: id }));
+  }, [searchParams]);
 
   return (
     <main className="container max-md pb-5 mb-5">

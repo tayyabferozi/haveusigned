@@ -10,7 +10,7 @@ const EditableField = ({
   return (
     <div className="py-1">
       <i
-        class="fa-solid fa-pencil me-2"
+        className="fa-solid fa-pencil me-2"
         onClick={() => setStepState(stepNo - 1)}
       ></i>
       {label} {envelopeInputDetails[inputName]}{" "}

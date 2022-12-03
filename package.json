@@ -2,6 +2,7 @@
   "name": "HYS",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://hys-staging-api-service.azurewebsites.net",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
     "@testing-library/jest-dom": "^5.14.1",

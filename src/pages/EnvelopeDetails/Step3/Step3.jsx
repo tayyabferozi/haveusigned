@@ -62,7 +62,7 @@ const Step3 = ({ errorsState }) => {
             <div className="radio-toolbar flex-shrink-0">
               {donationOptions.map((el, idx) => {
                 return (
-                  <React.Fragment>
+                  <React.Fragment key={Math.random() + idx}>
                     <input
                       type="radio"
                       id={"donation_" + el}
@@ -73,7 +73,7 @@ const Step3 = ({ errorsState }) => {
                       }
                       onChange={inputChangeHandler}
                     />
-                    <label className="me-2" for={"donation_" + el}>
+                    <label className="me-2" htmlFor={"donation_" + el}>
                       £{el}
                     </label>
                   </React.Fragment>
@@ -85,14 +85,24 @@ const Step3 = ({ errorsState }) => {
               type="number"
               name="ownerDonationAmount"
               placeholder="£ other"
-              value={
-                donationOptions.includes(
-                  +envelopeInputDetails.ownerDonationAmount
-                )
-                  ? ""
-                  : envelopeInputDetails.ownerDonationAmount
-              }
+              // value={
+              // donationOptions.includes(
+              //   +envelopeInputDetails.ownerDonationAmount
+              // )
+              //   ? ""
+              //   : envelopeInputDetails.ownerDonationAmount
+              // }
               onChange={inputChangeHandler}
+              onBlur={(e) => {
+                if (
+                  donationOptions.includes(
+                    +envelopeInputDetails.ownerDonationAmount
+                  )
+                ) {
+                  console.log(e.value);
+                  e.target.value = "";
+                }
+              }}
             />
           </div>
           {errorsState.ownerDonationAmount && (
@@ -100,20 +110,20 @@ const Step3 = ({ errorsState }) => {
               {errorsState.ownerDonationAmount}
             </div>
           )}
-
-          <label className="checkbox-container my-4">
-            I do not want to donate
-            <input
-              name="notWantsToDonate"
-              type="checkbox"
-              // defaultChecked={envelopeInputDetails.notWantsToDonate}
-              checked={envelopeInputDetails.notWantsToDonate}
-              onChange={inputChangeHandler}
-            />
-            <span className="checkmark"></span>
-          </label>
         </>
       )}
+
+      <label className="checkbox-container my-4">
+        I do not want to donate
+        <input
+          name="notWantsToDonate"
+          type="checkbox"
+          // defaultChecked={envelopeInputDetails.notWantsToDonate}
+          checked={envelopeInputDetails.notWantsToDonate}
+          onChange={inputChangeHandler}
+        />
+        <span className="checkmark"></span>
+      </label>
 
       {/* <div className="form-control"> */}
       {/* </div> */}

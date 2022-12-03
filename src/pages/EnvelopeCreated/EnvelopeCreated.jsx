@@ -1,18 +1,19 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import Button from "../../components/Button/Button";
 import MainSection from "../../layouts/MainSection/MainSection";
 
 import kebabize from "../../utils/kebabize";
 
 const EnvelopeCreated = () => {
-  const { card } = useSelector((state) => state.cardBuilder);
+  const { card, createdEnvelope } = useSelector((state) => state.cardBuilder);
 
   return (
     <MainSection>
       <div className="container">
-        <div class="card thankyou">
-          <div class="row mt-4">
-            <div class="col-lg-4 col-sm-12">
+        <div className="card thankyou">
+          <div className="row mt-4">
+            <div className="col-lg-4 col-sm-12">
               {card?.data?.cardImageFileName && (
                 <img
                   className="w-100"
@@ -23,8 +24,8 @@ const EnvelopeCreated = () => {
                 />
               )}
             </div>
-            <div class="col-lg-8 col-sm-12 p-4">
-              <h5 class="mb-4">Thank you for your order!</h5>
+            <div className="col-lg-8 col-sm-12 p-4">
+              <h5 className="mb-4">Thank you for your order!</h5>
               <p>
                 A confirmation email has been sent to you and the envelope has
                 been circulated to all your colleagues and friends inviting them
@@ -34,6 +35,13 @@ const EnvelopeCreated = () => {
                 To view the envelop, click on the link in your confirmation
                 email and enter your email address and password
               </p>
+
+              <Button
+                className="mt-3"
+                to={`/my-envelopes?id=${createdEnvelope?.data?.envelopeId}`}
+              >
+                View this envelope
+              </Button>
             </div>
           </div>
         </div>

@@ -120,6 +120,18 @@ const EnvelopeDetails = () => {
         hasErrors = true;
         setError("cardToBeReturnedByDate", "Please enter a return date");
       }
+      if (
+        !isEmpty(envelopeInputDetails.cardToBeReturnedByDate) &&
+        new Date(envelopeInputDetails.cardToBeReturnedByDate).getTime() <
+          Date.now()
+      ) {
+        setError(
+          "cardToBeReturnedByDate",
+          "Please enter a date from the future"
+        );
+        hasErrors = true;
+      }
+
       if (!envelopeInputDetails.notWantsToDonate)
         if (isEmpty(envelopeInputDetails.ownerDonationAmount)) {
           hasErrors = true;
@@ -146,6 +158,8 @@ const EnvelopeDetails = () => {
           cb: (state, errors) => {
             if (state === "error") toast.error("Uh Oh! Something went wrong");
             else navigate("/envelope-created");
+
+            window.open("https://stripe.com/", "_blank");
           },
         })
       );

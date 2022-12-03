@@ -38,7 +38,7 @@ const Step4 = () => {
             />
             <i
               onClick={() => dispatch(deleteParticipator(idx))}
-              class="fa-solid fa-trash"
+              className="fa-solid fa-trash"
             ></i>
           </div>
         );
